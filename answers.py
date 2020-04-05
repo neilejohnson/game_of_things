@@ -1,23 +1,38 @@
 import os
+import csv
 from pprint import pprint
 
 #test variables
-answers = [
-    {
-    'answer': 'this is the answer', 
-    'number': '+508-444-2645'
-    }, 
-    {
-    'answer': 'this is the second answer', 
-    'number': '+508-444-2555'
-    },
-    {
-    'answer': 'this is the third answer', 
-    'number': '+555-444-2505'
-    }
-]
+# answers = [
+#     {
+#     'answer': 'this is the answer', 
+#     'number': '+508-444-2645'
+#     }, 
+#     {
+#     'answer': 'this is the second answer', 
+#     'number': '+508-444-2555'
+#     },
+#     {
+#     'answer': 'this is the third answer', 
+#     'number': '+555-444-2505'
+#     }
+# ]
 
-last_move = ''
+# last_move = ''
+
+#passes incoming number 
+def check_number_answer(incoming_number: str, answers_file: str) -> str:
+    with open(answers_file, 'r') as csv_file:
+        for line in csv.DictReader(csv_file, fieldnames=('name', 'number')):
+            if incoming_number == line['number']:
+                return ''
+            return incoming_number
+
+# adds new player to answers.csv
+def add_answer(message_body: str, number: str, answers_file: str):
+    with open(answers_file, "a", newline="") as doc:
+        writer = csv.writer(doc)
+        writer.writerow([message_body, number])
 
 #pass in gm_input and pop cooresponding answer as return value
 def remove_answer(gm_input: str, answers: list, last_move: str) -> tuple:
@@ -48,26 +63,26 @@ def dismantle_answers(answers: list) -> list:
             output.append(answer[1])
     return output
 
-#should not be infinite loop
-while True:
-    #os.system('cls')
-    #build list
-    answers = format_answers(answers)
-    for answer in answers:
-        print(answer[0], answer[1]['answer'])
-    gm_input = input('')
+# #should not be infinite loop
+# while True:
+#     #os.system('cls')
+#     #build list
+#     answers = format_answers(answers)
+#     for answer in answers:
+#         print(answer[0], answer[1]['answer'])
+#     gm_input = input('')
 
-    #for each individual answer, check if gm_input is equal to string answer[0]
-    if gm_input in [str(answer[0]) for answer in answers]:
-        last_move = remove_answer(gm_input, answers, last_move)
-    elif gm_input == 'undo':
-        #put last move back into answers
-        answers.append(last_move)
-    else:
-        print('not a valid response')
+#     #for each individual answer, check if gm_input is equal to string answer[0]
+#     if gm_input in [str(answer[0]) for answer in answers]:
+#         last_move = remove_answer(gm_input, answers, last_move)
+#     elif gm_input == 'undo':
+#         #put last move back into answers
+#         answers.append(last_move)
+#     else:
+#         print('not a valid response')
 
-    #dismantle list for renumbering in next loop
-    answers = dismantle_answers(answers)
+#     #dismantle list for renumbering in next loop
+#     answers = dismantle_answers(answers)
 
 
 ####################################################
