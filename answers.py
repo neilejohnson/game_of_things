@@ -1,6 +1,7 @@
 import os
 import csv
 from pprint import pprint
+from time import sleep
 
 #test variables
 # answers = [
@@ -21,6 +22,7 @@ from pprint import pprint
 # last_move = ''
 
 #passes incoming number 
+#!!!!! this probably doesn't work
 def check_number_answer(incoming_number: str, answers_file: str) -> str:
     with open(answers_file, 'r') as csv_file:
         for line in csv.DictReader(csv_file, fieldnames=('name', 'number')):
@@ -41,11 +43,28 @@ def remove_answer(gm_input: str, answers: list, last_move: str) -> tuple:
             #must be -1 as the player's answer display index starts at 1 not 0
             return answers.pop(int(gm_input)-1)
 
+def get_number_answers(answers_file: str) -> int:
+    answers=[]
+    with open(answers_file, 'r') as csv_file:
+        for line in csv_file:
+            answers.append(line)
+    return len(answers)
+
+#refreshes answers list to capture all answers currently in answers_file
+def retrieve_answers(answers: list, answers_file: str):
+    #clear answers
+    del answers[:]
+    #append ordered dicts to answers list
+    with open(answers_file, 'r') as csv_file:
+        for line in csv.DictReader(csv_file, fieldnames=('answer', 'number')):
+            answers.append(dict(line)['answer'])
+
 ################################
 ### structuring answers list ###
 ################################
 
-#returns constructed list of answers to display in console 
+# returns constructed list of answers to display in console 
+# example [(1, 'some answer'), (2, 'another answer')]
 def format_answers(answers: list) -> list:
     answer_number = 1
     formatted_answers = []
@@ -56,6 +75,7 @@ def format_answers(answers: list) -> list:
     return formatted_answers
 
 #returns deconstructed list of current answers for renumbering in display
+# example ['some answer', 'another answer']
 def dismantle_answers(answers: list) -> list:
     output = []
     for answer in answers:
@@ -63,26 +83,35 @@ def dismantle_answers(answers: list) -> list:
             output.append(answer[1])
     return output
 
-# #should not be infinite loop
+#should not be infinite loop
 # while True:
 #     #os.system('cls')
 #     #build list
-#     answers = format_answers(answers)
-#     for answer in answers:
-#         print(answer[0], answer[1]['answer'])
-#     gm_input = input('')
+    
 
-#     #for each individual answer, check if gm_input is equal to string answer[0]
-#     if gm_input in [str(answer[0]) for answer in answers]:
-#         last_move = remove_answer(gm_input, answers, last_move)
-#     elif gm_input == 'undo':
-#         #put last move back into answers
-#         answers.append(last_move)
-#     else:
-#         print('not a valid response')
+#     while len(answers) != 1:
+        
+#         display_answers(answers)
+#         gm_input = input('***')
+#         sleep(5)
+#         dismantle_answers
+#         #display answers using function   
 
-#     #dismantle list for renumbering in next loop
-#     answers = dismantle_answers(answers)
+
+# #displays list of 
+
+# format_answers(answers)
+# def display_answers(answers):
+#     dismantle_answers(answers)
+    
+
+    
+
+
+    #  for answer in answers:
+    #     print(answer[0], answer[1]['answer'])
+    # gm_input = input('')
+
 
 
 ####################################################
