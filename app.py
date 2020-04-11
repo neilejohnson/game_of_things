@@ -11,9 +11,9 @@ app = Flask(__name__)
 @app.route("/sms", methods=['GET', 'POST'])
 def save_message():
 
-############################
-### retreives user input ###
-############################
+########################
+### define variables ###
+########################
 
     number = request.form['From']
     message_body = request.form['Body']
@@ -22,7 +22,7 @@ def save_message():
     temp_file = data_path+'temp.txt'
 
 ##################################################
-### checks for game masters 'start' or 'force' ###
+### check for game master's 'start' or 'force' ###
 ##################################################
 
     #initiatiate start of game - if any player texts 'start' to number, the game moves forward.
@@ -34,13 +34,14 @@ def save_message():
     elif message_body.lower() == 'force':
         with open(temp_file, "w") as temp:
             temp.write("reframe")
+            return 'force start'
 
 ###################################
 ### add response to answers.csv ###
 ###################################
     
     #identifies environmental variable
-    with open(data_path+'temp.txt', "r") as temp:
+    with open(temp_file, "r") as temp:
        environment = temp.readline()
 
     #adds player to csv if environment is 'name'

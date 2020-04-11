@@ -2,21 +2,40 @@
 # from answers import get_number_answers
 # from pathlib import Path
 from time import sleep
+import os
+random_block = '░'
 
-# answers_file=str(Path(__file__).parent)+'\\Data\\answers.csv'
-# num = get_number_answers(answers_file)
-# print(num)
+y=1
 
-a=0
-b=1
-c=0
-while a != b:
-    print('hello')
+while True:
+    os.system('cls')
+    print(  '\n' * 3 +
+            ' '*23 + random_block*13 + ' '*24 + '\n' +
+            ' '*22 + random_block +  ' '*13 + random_block + '\n' +
+            ' '*18 + random_block*4 +  ' '*3 + random_block + ' '*11 + random_block + '\n' +
+            ' '*17 + random_block +  ' '*14 + random_block + ' '*5 + random_block + '\n' +
+            ' '*17 + random_block +  ' '*20 + random_block)
+
+    if y%2==0:
+            print( 
+                ' '*17 + random_block +  ' '*20 + random_block + '\n' +
+                ' '*17 + random_block +  ' '*20 + random_block + '\n' +
+                ' '*18 + random_block*4 +  ' '*7 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
+                ' '*22 + random_block +  ' '*6 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
+                ' '*22 + random_block +  ' '*7 + random_block*3 + ' '*5 + random_block)
+    else:
+        print( 
+            ' '*18 + random_block*4 +  ' '*16 + random_block + '\n' +
+            ' '*22 + random_block +  ' '*15 + random_block + '\n' +
+            ' '*19 + random_block*3 +  ' '*7 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
+            ' '*18 + random_block +  ' '*10 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
+            ' '*19 + random_block*3 +  ' '*8 + random_block*3 + ' '*5 + random_block)
+
+    print(
+            ' '*22 + random_block + ' '*15 + random_block + '\n' +
+            ' '*23 + random_block + ' '*13 + random_block + '\n' +
+            ' '*24 + random_block + ' '*4 + random_block*3 + ' '*4 + random_block + '\n' +
+            ' '*25 + random_block*4 + ' '*3 + random_block*4)
     sleep(1)
-    c += 1
-    # check environment
-    if True:
-        if c == 4:
-            break
-
-print('after')
+    y+=1
+  

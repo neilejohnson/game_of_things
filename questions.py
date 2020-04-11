@@ -1,11 +1,5 @@
 from random import randint
 
-# At start of game find the length of questions list.
-
-# used_questions = []
-
-#questions_file = 'game_of_things_questions.txt'
-
 #finds num of lines in the questions doc
 def find_num_of_lines(file: str) -> int:
     with open(file, 'r') as lines:
@@ -21,13 +15,3 @@ def get_random_question(file: str, num_of_questions: int, used_questions: list) 
         used_questions.append(random_num)
         lines = questions.readlines()
         return lines[random_num].strip()
-
-
-#find number of questions in the question list
-#num_of_questions = find_num_of_lines(questions_file)
-
-# print(get_random_question(questions_file))
-# print(get_random_question(questions_file))
-
-# print(used_questions)
-
