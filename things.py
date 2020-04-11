@@ -2,6 +2,7 @@ import csv
 import os
 from pathlib import Path
 from time import sleep
+from display import display_animation
 from players import display_available_players, retrieve_players
 from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
 from questions import find_num_of_lines, get_random_question
@@ -138,25 +139,17 @@ while True:
         #if there is only one answer left, the round is over and it breaks this loop
         if len(answers) == 1:
             clear_file(answers_file)
-            print('round is over! Wasn\'t that fun??')
-            sleep(3)
+            winner = 'Jordan'
+            display_animation(winner)
+            os.system('cls')
+            sleep(2)
             round_over = True
 
         #dismantle list for renumbering in next loop
         answers = dismantle_answers(answers)
 
-###1. gets random question
-###2. clear answers file
-###3. DISPLAY - RANDOM QUESTION
-###4. collect answers
-#5. *** after 45 seconds, if someone hasn't yet submitted an answer, call them out.
-#6. *** text force to carry to the next stage
-###7. display answers on screen
-###8. allow for number to be input to delete them
-###9. If answer == 1 then the round is over.
-#10. short animation plays. 
-
-
-#display_question(list) from display.py
-#   * After 60 seconds display which players still need to answer
+#Functionality to add
+#1. after 45 seconds, if someone hasn't yet submitted an answer, call them out by name.
+#2. fix check_number_player and check_number_answer
+#3. max players... 9
 
