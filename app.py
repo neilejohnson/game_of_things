@@ -16,7 +16,7 @@ def save_message():
 ########################
 
     number = request.form['From']
-    message_body = request.form['Body']
+    message_body = request.form['Body'].strip()
 
     data_path = str(Path(__file__).parent)+'\\Data\\'
     temp_file = data_path+'temp.txt'

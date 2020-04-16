@@ -3,10 +3,11 @@ from time import sleep
 from random import randint
 from colored import fg, attr
 
-def display_animation(winner):
+colors = [87, 158, 216, 187, 225, 169, 141, 147]
+blocks = ['░','▒','▓']
+
+def display_animation(winner, blocks, colors):
     #define variables and random instances
-    colors = [87, 158, 216, 187, 225, 169, 141, 147]
-    blocks = ['░','▒','▓']
     reset = attr('reset')
     space = '   '
     random_color = fg(colors[randint(0,len(colors)-1)])
@@ -49,6 +50,7 @@ def display_animation(winner):
 
     random_animation = animations[randint(0,len(animations)-1)]
 
+    #character animation
     for x in range(14):
         os.system('cls')
         print(random_color + random_animation['static1'])
@@ -69,4 +71,25 @@ def display_question(current_question):
     # print('*'*70+'\n')
     # print('')
     pass
+
+def display_homescreen(blocks, colors):
+    random_color = fg(colors[randint(0,len(colors)-1)])
+    random_block = blocks[randint(0,len(blocks)-1)]
     
+    os.system('cls')
+    #set random color
+    print(random_color)
+
+    print(random_block * 70 + '\n')
+    print(random_block * 70 + '\n')
+    print(random_block * 70 + '\n')
+
+    print('\t\tTHE\n\t\t\tGAME\n\t\t\t\tOF\n\t\t\t\t\tTHINGS\n')
+
+    print(random_block * 70 + '\n')
+    print(random_block * 70 + '\n')
+    print(random_block * 70)
+
+    #clear random color
+    print(attr('reset'))
+

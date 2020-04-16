@@ -36,12 +36,13 @@ def retrieve_players(players: list, players_file: str):
 def display_available_players(players: list, players_file: str):
     retrieve_players(players, players_file)
     os.system('cls')
+    print('*'*70 * 4 + '\n')
     if players: #players contains any value
         for player in players:
             if player: #remove any empty lines
-                print('***\t'+player['name'])
+                print('\t\t'+player['name'])
     else:
-        print("No players have joined the game yet.")
+        print('\t\t'+"No players have joined the game yet.")
 
 def add_player_answer(message_body: str, answers_file: str):
     with open(answers_file, 'a') as text_doc:

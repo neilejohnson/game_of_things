@@ -2,10 +2,11 @@ import csv
 import os
 from pathlib import Path
 from time import sleep
-from display import display_animation
+from display import display_animation, display_homescreen
 from players import display_available_players, retrieve_players
 from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
 from questions import find_num_of_lines, get_random_question
+from colored import fg, attr
 
 #####################################
 #####################################
@@ -24,8 +25,13 @@ answers_file = data_path + 'answers.csv'
 players_file = data_path + 'players.csv'
 questions_file = data_path + 'game_of_things_questions.txt'
 
+# define colored module variables
+colors = [87, 158, 216, 187, 225, 169, 141, 147]
+blocks = ['░','▒','▓']
+reset = attr('reset')
+
 #deletes contents of txt or csv files
-def clear_file(file_to_clear):
+def clear_file(file_to_clear: str):
     open(file_to_clear, 'w').close()
 
 # clear all temp game files
@@ -41,7 +47,14 @@ number_of_answers = 0
 last_move = 0
 
 # identify number of questions in the question file
+# this allows for questions to be added or removed from quesions_file 
 num_of_questions = find_num_of_lines(questions_file)
+
+#displays the Game of Things homescreen
+display_homescreen(blocks, colors)
+sleep(7)
+os.system('cls')
+sleep(1)
 
 ###############################
 ##### GET NAME OF PLAYERS #####
@@ -91,10 +104,10 @@ while True:
 
     # awaiting for answers to reach number of players
     while number_of_answers != len(players):
-        print('retrieving answers...')
         #pulls new question from question_file and drops it in used_questions list
         number_of_answers = get_number_answers(answers_file)
         os.system('cls') #clear screen
+        #display_current_question
         print(current_question)
         sleep(5)
         # check environment
@@ -104,7 +117,7 @@ while True:
                 break
     
     os.system('cls') #clear screen
-    print('the answers are in!')
+    print('\n\n\n\t' + 'The answers are in!')
     sleep(5)
 
     #######################
@@ -140,13 +153,18 @@ while True:
         if len(answers) == 1:
             clear_file(answers_file)
             winner = 'Jordan'
-            display_animation(winner)
+            display_animation(winner, blocks, colors)
             os.system('cls')
             sleep(2)
             round_over = True
 
         #dismantle list for renumbering in next loop
         answers = dismantle_answers(answers)
+
+#Stuff to add
+#1. Display Questions
+#2. Display Answers
+#3. get 'winner' to put into winner animation
 
 #Functionality to add
 #1. after 45 seconds, if someone hasn't yet submitted an answer, call them out by name.
