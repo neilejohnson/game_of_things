@@ -2,17 +2,27 @@ import csv
 import os
 from pathlib import Path
 from time import sleep
-from display import display_animation, display_homescreen
-from players import display_available_players, retrieve_players
+from display import display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header
+from players import retrieve_players
 from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
 from questions import find_num_of_lines, get_random_question
 from colored import fg, attr
+from random import randint
 
 #####################################
 #####################################
 ###########     SETUP     ###########
 #####################################
 #####################################
+
+# Display Settings: 
+# Size: 125% 
+# Resolution: 1920x1080
+
+# Windows PowerShell Settings:
+# Font Size: 36
+# Font: Lucida Console
+# Screen Background: Black
 
 #####################
 ##### PREP GAME #####
@@ -53,6 +63,8 @@ num_of_questions = find_num_of_lines(questions_file)
 #displays the Game of Things homescreen
 display_homescreen(blocks, colors)
 sleep(7)
+
+#short blank screen
 os.system('cls')
 sleep(1)
 
@@ -67,13 +79,18 @@ with open(temp_file, "w") as temp:
 with open(temp_file, "r") as temp:
     environment = temp.readline()
 
+random_color = fg(colors[randint(0,len(colors)-1)])
+random_block = blocks[randint(0,len(blocks)-1)]
+
 #displays players names as they enter game
+print(random_color)
 while environment == 'name':
-    display_available_players(players, players_file)
+    display_available_players(players, players_file, random_block)
     sleep(5)
     #'start' in app.py will change environment, breaking this while loop
     with open(temp_file, "r") as temp:
         environment = temp.readline()
+print(reset)
 
 ####################################
 ####################################
@@ -102,22 +119,26 @@ while True:
     ### dislay question and accept answers ###
     ##########################################
 
+    random_color = fg(colors[randint(0,len(colors)-1)])
+    random_block = blocks[randint(0,len(blocks)-1)]
+
     # awaiting for answers to reach number of players
     while number_of_answers != len(players):
         #pulls new question from question_file and drops it in used_questions list
         number_of_answers = get_number_answers(answers_file)
-        os.system('cls') #clear screen
+        os.system('cls')
         #display_current_question
-        print(current_question)
+        display_current_question(current_question, random_block, random_color)
         sleep(5)
         # check environment
         with open(temp_file, "r") as temp:
             environment = temp.readline()
             if environment == 'reframe':
                 break
-    
+    print(reset)
+
     os.system('cls') #clear screen
-    print('\n\n\n\t' + 'The answers are in!')
+    print('\n' * 7 + '\t' * 2 + 'The answers are in!')
     sleep(5)
 
     #######################
@@ -129,16 +150,23 @@ while True:
     retrieve_answers(answers, answers_file)
     round_over = False
 
+    random_color = fg(colors[randint(0,len(colors)-1)])
+    random_block = blocks[randint(0,len(blocks)-1)]
+
     while not round_over:
         #clear gm_input
         gm_input = 0
         #format answers so that they have a distinct order - example [(1, {'answer': 'some answer})]
         answers = format_answers(answers)
         
+        display_answers_header(current_question, random_block, random_color)
+
         for answer in answers:
-            print(answer[0], answer[1])
-            
-        gm_input = input('Which answer would you like to remove?\n')
+            print('   ' + str(answer[0]) + '  ' + answer[1])
+
+        print(random_color + '\n' * (11 - len(answers)) + random_block * 70 + reset)
+
+        gm_input = input('\nWhich answer would you like to remove?\n')
         
         #for each individual answer, check if gm_input is equal to string answer[0]
         if gm_input in [str(answer[0]) for answer in answers]:

@@ -32,18 +32,6 @@ def retrieve_players(players: list, players_file: str):
         for line in csv.DictReader(csv_file, fieldnames=('name', 'number', 'status')):
             players.append(dict(line))
 
-#display list of players as they come in
-def display_available_players(players: list, players_file: str):
-    retrieve_players(players, players_file)
-    os.system('cls')
-    print('*'*70 * 4 + '\n')
-    if players: #players contains any value
-        for player in players:
-            if player: #remove any empty lines
-                print('\t\t'+player['name'])
-    else:
-        print('\t\t'+"No players have joined the game yet.")
-
 def add_player_answer(message_body: str, answers_file: str):
     with open(answers_file, 'a') as text_doc:
         text_doc.write(message_body+'\n')
