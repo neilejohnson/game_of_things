@@ -2,12 +2,13 @@ import csv
 import os
 from pathlib import Path
 from time import sleep
-from display import display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header
-from players import retrieve_players
+from display import display_answers_in, display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header, display_round
+from players import retrieve_players, retreive_winning_player
 from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
 from questions import find_num_of_lines, get_random_question
 from colored import fg, attr
 from random import randint
+from misc import clear_file
 
 #####################################
 #####################################
@@ -23,6 +24,7 @@ from random import randint
 # Font Size: 36
 # Font: Lucida Console
 # Screen Background: Black
+# Screen maximized
 
 #####################
 ##### PREP GAME #####
@@ -40,10 +42,6 @@ colors = [87, 158, 216, 187, 225, 169, 141, 147]
 blocks = ['░','▒','▓']
 reset = attr('reset')
 
-#deletes contents of txt or csv files
-def clear_file(file_to_clear: str):
-    open(file_to_clear, 'w').close()
-
 # clear all temp game files
 clear_file(temp_file)
 clear_file(answers_file)
@@ -55,6 +53,7 @@ answers = []
 used_questions = []
 number_of_answers = 0
 last_move = 0
+round_number = 1
 
 # identify number of questions in the question file
 # this allows for questions to be added or removed from quesions_file 
@@ -79,6 +78,7 @@ with open(temp_file, "w") as temp:
 with open(temp_file, "r") as temp:
     environment = temp.readline()
 
+#set random elements
 random_color = fg(colors[randint(0,len(colors)-1)])
 random_block = blocks[randint(0,len(blocks)-1)]
 
@@ -113,12 +113,17 @@ while True:
     current_question = get_random_question(questions_file, num_of_questions, used_questions)
     #clears answer file for new round
     clear_file(answers_file)
+
     number_of_answers = 0
+
+    #displays which round number they are on
+    display_round(round_number)
 
     ##########################################
     ### dislay question and accept answers ###
     ##########################################
 
+    #set random elements
     random_color = fg(colors[randint(0,len(colors)-1)])
     random_block = blocks[randint(0,len(blocks)-1)]
 
@@ -130,22 +135,22 @@ while True:
         #display_current_question
         display_current_question(current_question, random_block, random_color)
         sleep(5)
-        # check environment
+        # check environment. If 'force' message received, moves forward without all answers
         with open(temp_file, "r") as temp:
             environment = temp.readline()
             if environment == 'reframe':
                 break
     print(reset)
 
-    os.system('cls') #clear screen
-    print('\n' * 7 + '\t' * 2 + 'The answers are in!')
-    sleep(5)
+    #answers are in screen
+    display_answers_in()
 
     #######################
     ### display answers ###
     #######################
     
-    os.system('cls') #clear screen
+    os.system('cls')
+
     # populate answers list from answers_file
     retrieve_answers(answers, answers_file)
     round_over = False
@@ -174,28 +179,27 @@ while True:
         elif gm_input.lower() == 'undo':
             #put last move back into answers
             answers.append(last_move)
-        else:
-            print('not a valid response')
 
         #if there is only one answer left, the round is over and it breaks this loop
         if len(answers) == 1:
-            clear_file(answers_file)
-            winner = 'Jordan'
-            display_animation(winner, blocks, colors)
+
+            #program how to find winner....
+            winner_round = retreive_winning_player(answers, answers_file, players_file)
+            
+            display_animation(winner_round, blocks, colors)
             os.system('cls')
             sleep(2)
+            round_number += 1
+
+            #clear answer file for next round
+            clear_file(answers_file)
+
             round_over = True
 
         #dismantle list for renumbering in next loop
         answers = dismantle_answers(answers)
 
-#Stuff to add
-#1. Display Questions
-#2. Display Answers
-#3. get 'winner' to put into winner animation
-
 #Functionality to add
 #1. after 45 seconds, if someone hasn't yet submitted an answer, call them out by name.
-#2. fix check_number_player and check_number_answer
-#3. max players... 9
+#2. max players... 8
 

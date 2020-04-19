@@ -1,10 +1,11 @@
 import csv
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
-from players import add_player, add_player_answer, check_number_player
+from players import add_player, add_player_answer
 from random import randint
-from answers import check_number_answer, add_answer
+from answers import add_answer
 from pathlib import Path
+from misc import dismiss_duplicate_response
 
 app = Flask(__name__)
 
@@ -47,9 +48,10 @@ def save_message():
     #adds player to csv if environment is 'name'
     if environment != 'name':
         answers_file = data_path+'answers.csv'
-        # !!!! this probably doesn't work. check back later
-        #number = check_number_answer(number, answers_file)
+        #number = dismiss_duplicate_response(number, answers_file)
         if number:
+            #only logs names up to 100 characters
+            message_body = message_body[:100]
             add_answer(message_body, number, answers_file)
             return '{} has submitted a response. - {}'.format(number, message_body)
         return '{} has already submitted a response.'.format(number)
@@ -60,13 +62,12 @@ def save_message():
 
     else:
         players_file = data_path + 'players.csv'
-        #if player's number has already been used, do not accept. !!!! Currently doesn't work
-        #number = check_number_player(number, players_file) 
+        #number = dismiss_duplicate_response(number, players_file) 
         if number:
+            #only logs names up to 10 characters
+            message_body = message_body[:10]
             add_player(message_body, number, players_file)
-            print('added player')
             return '{} has joined the game.'.format(message_body)
-        print('nope')
         return '{} has already submitted a response'.format(number)
 
     return number, message_body

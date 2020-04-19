@@ -21,15 +21,6 @@ from time import sleep
 
 # last_move = ''
 
-#passes incoming number 
-#!!!!! this probably doesn't work
-def check_number_answer(incoming_number: str, answers_file: str) -> str:
-    with open(answers_file, 'r') as csv_file:
-        for line in csv.DictReader(csv_file, fieldnames=('name', 'number')):
-            if incoming_number == line['number']:
-                return ''
-            return incoming_number
-
 # adds new player to answers.csv
 def add_answer(message_body: str, number: str, answers_file: str):
     with open(answers_file, "a", newline="") as doc:

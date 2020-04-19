@@ -82,7 +82,7 @@ def display_current_question(current_question: str, random_block: str, random_co
     print(random_color + '\n' + random_block * 70)
     print(random_block * 10 + ' ' * 50 + random_block * 10)
     print(random_block * 5 + ' ' * 60 + random_block * 5)
-    print(random_block * 2 + ' ' * 66 + random_block * 3 + '\n')
+    print(random_block * 2 + ' ' * 66 + random_block * 2 + '\n')
     print(attr('reset') + '     ' + current_question.upper() + '\n' * 6)
     print(random_color + '\t\t\tplease submit your answers now\n\n')
     print(random_block * 2 + ' ' * 66 + random_block * 2)
@@ -116,3 +116,21 @@ def display_answers_header(current_question, random_block, random_color):
     print(random_color + '\n' * 2 + random_block * 70)
     print(' ' + current_question.upper())
     print(random_color + random_block * 70+'\n'*2 + attr('reset'))
+
+def display_round(round_number):
+    os.system('cls')
+    print('\n'*8)
+    print('\t\t\t      ROUND {}'.format(round_number))
+    print('\n'*10)
+    sleep(3.5)
+    os.system('cls')
+    sleep(2)
+
+def display_answers_in():
+    os.system('cls')
+    print('\n'*8)
+    print('\t\t\tThe answers are in!')
+    print('\n'*10)
+    sleep(3.5)
+    os.system('cls')
+    sleep(2)
