@@ -7,6 +7,52 @@ from players import retrieve_players
 colors = [87, 158, 216, 187, 225, 169, 141, 147]
 blocks = ['░','▒','▓']
 
+def _winning_message(winner: str) -> str:
+    messages = [
+        ' Congrats, {}!! Great job. ', 
+        '{}, you are a smart cookie.',
+        ' I never doubted you, {}!! ',
+        'Can you believe it? {} won.', 
+        '       {} is my hero       ', 
+        ' Smooth, {}.  Real smooth. ', 
+        '    {} hath triumphed!!    ', 
+        '  Three Cheers for {}!!!!  ', 
+        ' Ahhhhh! Wow. Good job {}. ', 
+        ' I am so proud of you, {}! ', 
+        '  So stoked for you, {}!!  ', 
+        ' And the round goes to {}! ', 
+        ' {}, did you hear? You won ', 
+        'Boy howdy, {}. You did good', 
+        'Not surprised! {} is smart.', 
+        ' {} is my favorite human!! ', 
+        '   {} is just that good.   ', 
+        'Look at {}, cleaning house!', 
+        '      Miraculous, {}!      ', 
+        '      Stupendous, {}!      ', 
+        '     Dynamite job, {}!     ', 
+        '  A colossal win for {}!!  ', 
+        ' {}, consider me impressed ', 
+        ' {}, what a grand display! ', 
+        ' Woop! Woop! Go get em {}! ', 
+        'Wowie Zowie! {} is a beast.', 
+        '    {}! I’m not worthy!    ', 
+        'Gosh darn it. {} is so cool', 
+        '    Nice, {}. Real nice    ', 
+        '  {} is one gnarly human.  ', 
+        'Capital job, {}! As always.', 
+        '  Hear the news? {} won!!  ', 
+        '      {} is superior.      ', 
+        '       {}, nice job.       ', 
+        '   Flawless victory, {}!!  ', 
+        'Yes, {}! You are so mighty.', 
+        '     {} is an expert!!     ', 
+        '   {} has a decent brain   '
+    ]
+
+    random_message = messages[randint(0,len(messages)-1)]
+
+    return random_message.format(winner)
+
 def display_animation(winner, blocks, colors):
     #define variables and random instances
     reset = attr('reset')
@@ -15,127 +61,343 @@ def display_animation(winner, blocks, colors):
     random_block = blocks[randint(0,len(blocks)-1)]
 
     animations = [
-        #1 creature    
+        #1 computer
         {
-            'static1': 
-                '\n' * 3 +
-                space + ' '*23 + random_block*13 + ' '*24 + '\n' +
-                space + ' '*22 + random_block +  ' '*13 + random_block + '\n' +
-                space + ' '*18 + random_block*4 +  ' '*3 + random_block + ' '*11 + random_block + '\n' +
-                space + ' '*17 + random_block +  ' '*14 + random_block + ' '*5 + random_block + '\n' +
-                space + ' '*17 + random_block +  ' '*20 + random_block,
-
-            'static2': 
-                space + ' '*22 + random_block + ' '*15 + random_block + '\n' +
-                space + ' '*23 + random_block + ' '*13 + random_block + '\n' +
-                space + ' '*24 + random_block + ' '*4 + random_block*3 + ' '*4 + random_block + '\n' +
-                space + ' '*25 + random_block*4 + ' '*3 + random_block*4, 
-
-            'movement1': 
-                space + ' '*17 + random_block +  ' '*20 + random_block + '\n' +
-                space + ' '*17 + random_block +  ' '*20 + random_block + '\n' +
-                space + ' '*18 + random_block*4 +  ' '*7 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
-                space + ' '*22 + random_block +  ' '*6 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
-                space + ' '*22 + random_block +  ' '*7 + random_block*3 + ' '*5 + random_block,
-            'movement2': 
-                space + ' '*18 + random_block*4 +  ' '*16 + random_block + '\n' +
-                space + ' '*22 + random_block +  ' '*15 + random_block + '\n' +
-                space + ' '*19 + random_block*3 +  ' '*7 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
-                space + ' '*18 + random_block +  ' '*10 + random_block + ' '*3 + random_block + ' '*4 + random_block + '\n' +
-                space + ' '*19 + random_block*3 +  ' '*8 + random_block*3 + ' '*5 + random_block
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                 1111111111111111111111111' + '\n' +
+                '                1                         1' + '\n' +
+                '      11 11    1   111111111111111111111   1    11 11' + '\n' +
+                '     1111111   1   1                   1   1   1111111' + '\n' +
+                '     1111111   1   1   1          1    1   1   1111111' + '\n' +
+                '      11111    1   1                   1   1    11111' + '\n' +
+                '       111     1   1                   1   1     111' + '\n' +
+                '        1      1   1     1      1      1   1      1' + '\n' +
+                '               1   1      111111       1   1' + '\n' +
+                '               1   1                   1   1' + '\n' +
+                '               1   111111111111111111111   1' + '\n' +
+                '                1                         1' + '\n' +
+                '                 1111111111111111111111111' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                 1111111111111111111111111' + '\n' +
+                '                1                         1' + '\n' +
+                '     11 11     1   111111111111111111111   1     11 11' + '\n' +
+                '    1111111    1   1                   1   1    1111111' + '\n' +
+                '    1111111    1   1   1          1    1   1    1111111' + '\n' +
+                '     11111     1   1                   1   1     11111' + '\n' +
+                '      111      1   1                   1   1      111' + '\n' +
+                '       1       1   1     1      1      1   1       1' + '\n' +
+                '               1   1      111111       1   1' + '\n' +
+                '               1   1                   1   1' + '\n' +
+                '               1   111111111111111111111   1' + '\n' +
+                '                1                         1' + '\n' +
+                '                 1111111111111111111111111' + '\n'
         },
         #2 bird
         {
-            'static1': 
-                '\n' * 4,
-
-            'static2': 
-                ' ' * 21 + random_block * 14 + '\n' +
-                ' ' * 24 + random_block + ' ' * 6 + random_block + '\n' +
-                ' ' * 23 + random_block + ' ' * 8 + random_block, 
-
-            'movement1': 
-                ' ' * 21 + random_block * 14 + '\n' +
-                ' ' * 20 + random_block + ' ' * 14 + random_block + '\n' +
-                ' ' * 19 + random_block + ' ' * 16 + random_block + '\n' +
-                ' ' * 17 + random_block * 2 + ' ' * 3 + random_block + ' ' * 14 + random_block * 2 + '\n' +
-                ' ' * 15 + random_block * 2 + ' ' * 16 + random_block + ' ' * 5 + random_block * 2 + '\n' +
-                ' ' * 12 + random_block * 3 + ' ' * 26 + random_block * 3 + '\n' +
-                ' ' * 10 + random_block * 2 + ' ' * 32 + random_block * 2 + '\n' +
-                ' ' * 9 + random_block + ' ' * 8 + random_block + ' ' * 6 + random_block * 4 + ' ' * 8 + random_block + ' ' * 8 + random_block + '\n' +
-                ' ' * 8 + random_block + ' ' * 6 + random_block * 3 + ' ' + random_block + ' ' * 16 + random_block + ' ' + random_block * 4 + ' ' * 5 + random_block + '\n' +
-                ' ' * 9 + random_block * 6 + ' ' * 5 + random_block + ' ' * 14 + random_block + ' ' * 5 + random_block * 6,
-
-            'movement2': 
-                ' ' * 9 + random_block * 3 + ' ' * 9 + random_block * 14 + ' ' * 9 + random_block * 3 + '\n' +
-                ' ' * 8 + random_block + ' ' * 3 + random_block + ' ' * 7 + random_block + ' ' * 14 + random_block + ' ' * 7 + random_block + ' ' * 3 + random_block + '\n' +
-                ' ' * 8 + random_block + ' ' * 4 + random_block * 3 + ' ' * 3 + random_block + ' ' * 16 + random_block + ' ' * 3 + random_block * 3 + ' ' * 4 + random_block + '\n' +
-                ' ' * 8 + random_block + ' ' * 7 + random_block * 3 + ' ' * 3 + random_block + ' ' * 14 + random_block * 3 + ' ' * 7 + random_block + '\n' +    
-                ' ' * 9 + random_block + ' ' * 23 + random_block + ' ' * 12 + random_block + '\n' +
-                ' ' * 10 + random_block + ' ' * 34 + random_block + '\n' +
-                ' ' * 11 + random_block * 3 + ' ' * 28 + random_block * 3 + '\n' +
-                ' ' * 14 + random_block * 5 + ' ' * 6 + random_block * 4 + ' ' * 8 + random_block * 5 + '\n' +
-                ' ' * 19 + random_block + ' ' * 16 + random_block + '\n' +
-                ' ' * 20 + random_block + ' ' * 14 + random_block
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                     11111111111111' + '\n' +
+                '                    1              1' + '\n' +
+                '                   1                1' + '\n' +
+                '                 11   1              11' + '\n' +
+                '               11                1     11' + '\n' +
+                '            111                          111' + '\n' +
+                '          11                                11' + '\n' +
+                '         1        1      1111        1        1' + '\n' +
+                '        1      111 1                1 111      1' + '\n' +
+                '         111111     1              1     111111' + '\n' +
+                '                     11111111111111' + '\n' +
+                '                        1      1' + '\n' +
+                '                       1        1' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '         111         11111111111111         111' + '\n' +
+                '        1   1       1              1       1   1' + '\n' +
+                '        1   111   1                1   111    1' + '\n' +
+                '        1       111   1              111       1' + '\n' +
+                '         1                       1            1' + '\n' +
+                '          1                                  1' + '\n' +
+                '           111                            111' + '\n' +
+                '              11111      1111        11111' + '\n' +
+                '                   1                1' + '\n' +
+                '                    1              1' + '\n' +
+                '                     11111111111111' + '\n' +
+                '                        1      1' + '\n' +
+                '                       1        1' + '\n'
         },
         #3 slime
         {
-            'static1': 
-                '\n' * 3,
-
-            'static2': 
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                     11111111111111111111' + '\n' +
+                '                  111                    1' + '\n' +
+                '                11                        11' + '\n' +
+                '               1                            1' + '\n' +
+                '              1                              1' + '\n' +
+                '             1       1                        1' + '\n' +
+                '            1                            1     1' + '\n' +
+                '           1                                   1' + '\n' +
+                '           1             11111111111111         1' + '\n' +
+                '           1                                    1' + '\n' +
+                '            111111111111111111111111111111111111' + '\n' +
                 '\n',
-
-            'movement1': 
-                '\n' * 2 +
-                ' ' * 21 + random_block * 20 + '\n' +
-                ' ' * 18 + random_block * 3 + ' ' * 20 + random_block + '\n' +
-                ' ' * 16 + random_block * 2 + ' ' * 24 + random_block * 2 + '\n' +
-                ' ' * 15 + random_block + ' ' * 28 + random_block + '\n' +
-                ' ' * 14 + random_block + ' ' * 30 + random_block + '\n' +
-                ' ' * 13 + random_block + ' ' * 7 + random_block + ' ' * 24 + random_block + '\n' +
-                ' ' * 12 + random_block + ' ' * 28 + random_block + ' ' * 5 + random_block + '\n' +
-                ' ' * 11 + random_block + ' ' * 35 + random_block + '\n' +
-                ' ' * 11 + random_block + ' ' * 13 + random_block * 14 + ' ' * 9 + random_block + '\n' +
-                ' ' * 11 + random_block + ' ' * 36 + random_block + '\n' +
-                ' ' * 12 + random_block * 36,
-
-            'movement2': 
-                ' ' * 20 + random_block * 22 + '\n' +
-                ' ' * 17 + random_block * 3 + ' ' * 22 + random_block * 3 + '\n' +
-                ' ' * 15 + random_block * 2 + ' ' * 28 + random_block * 2 + '\n' +
-                ' ' * 14 + random_block + ' ' * 32 + random_block + '\n' +    
-                ' ' * 13 + random_block + ' ' * 34 + random_block + '\n' +
-                ' ' * 12 + random_block + ' ' * 7 + random_block + ' ' * 28 + random_block + '\n' +
-                ' ' * 11 + random_block + ' ' * 28 + random_block + ' ' * 8 + random_block + '\n' +
-                ' ' * 11 + random_block + ' ' * 37 + random_block + '\n' +
-                ' ' * 12 + random_block + ' ' * 35 + random_block + '\n' +
-                ' ' * 12 + random_block + ' ' * 11 + random_block * 14 + ' ' * 10 + random_block + '\n' +
-                ' ' * 13 + random_block * 2 + ' ' * 31 + random_block * 2 + '\n' +
-                ' ' * 15 + random_block + ' ' * 29 + random_block + '\n' +
-                ' ' * 16 + random_block * 29 + '\n'
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                    1111111111111111111111' + '\n' +
+                '                 111                      111' + '\n' +
+                '               11                            11' + '\n' +
+                '              1                                1' + '\n' +
+                '             1                                  1' + '\n' +
+                '            1       1                            1' + '\n' +
+                '           1                            1        1' + '\n' +
+                '           1                                     1' + '\n' +
+                '            1                                   1' + '\n' +
+                '            1           11111111111111          1' + '\n' +
+                '             11                               11' + '\n' +
+                '               1                             1' + '\n' +
+                '                11111111111111111111111111111' + '\n' +
+                '\n'
+        },
+        #4 ghosts
+        {
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '              111111111              111111111' + '\n' +
+                '             1         1            1         1' + '\n' +
+                '            1   1    1  1          1  1    1   1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '            1     11    1          1    11     1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '             1  11  11  1          1  11  11  1' + '\n' +
+                '              11  11  11            11  11  11' + '\n' +
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '              111111111              111111111' + '\n' +
+                '             1         1            1         1' + '\n' +
+                '            1   1    1  1          1  1    1   1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '            1     11    1          1    11     1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '            1           1          1           1' + '\n' +
+                '            1  11  11  1            1  11  11  1' + '\n' +
+                '             11  11  11              11  11  11' + '\n' +
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n'
+        },
+        #5 alien
+        {
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '             11111111                 11111111' + '\n' +
+                '            11 1    11               11  1   11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '             11111111   11111111111   11111111' + '\n' +
+                '                11111111111111111111111111' + '\n' +
+                '             1111111111111111111111111111111' + '\n' +
+                '               11       11     111111111111111' + '\n' +
+                '                                11111111111111' + '\n' +
+                '                              111111111111111' + '\n' +
+                '                 1111111111111111111111111' + '\n' +
+                '                    1111111111111111111111' + '\n' +
+                '                     111         1111' + '\n' +
+                '                   11111       111111' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '             11111111                 11111111' + '\n' +
+                '            11 1    11               11  1   11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '            11      11               11      11' + '\n' +
+                '             11111111   11111111111   11111111' + '\n' +
+                '                11111111111111111111111111' + '\n' +
+                '             1111111111111111111111111111111' + '\n' +
+                '             111111111111111111111111111111111' + '\n' +
+                '             111111111111111111111111111111111' + '\n' +
+                '              1111111111111111111111111111111' + '\n' +
+                '                 1111111111111111111111111' + '\n' +
+                '                    1111111111111111111111' + '\n' +
+                '                     111         1111' + '\n' +
+                '                   11111       111111' + '\n'
+        },
+        #6 robot
+        {
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                1111111111111111111111111' + '\n' +
+                '               111111111111111111111111111' + '\n' +
+                '             1111   1                1  1111' + '\n' +
+                '             1111                       1111' + '\n' +
+                '             1111111111111111111111111111111' + '\n' +
+                '                     1111     11111' + '\n' +
+                '                      111111111111' + '\n' +
+                '                     1 1111111111 1' + '\n' +
+                '                    1  1111111111  1' + '\n' +
+                '                   1    11111111    1' + '\n' +
+                '                        11111111' + '\n' +
+                '                         1    1' + '\n' +
+                '                         1    1' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                1111111111111111111111111' + '\n' +
+                '               111111111111111111111111111' + '\n' +
+                '             1111   1                1  1111' + '\n' +
+                '             1111                       1111' + '\n' +
+                '             1111111111111111111111111111111' + '\n' +
+                '                     1111     11111' + '\n' +
+                '                 111  111111111111  111' + '\n' +
+                '                    11 1111111111 11' + '\n' +
+                '                       1111111111' + '\n' +
+                '                        11111111' + '\n' +
+                '                        11111111' + '\n' +
+                '                         1    1' + '\n' +
+                '                         1    1' + '\n'
+        },
+        #7 owl
+        {
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                      11                11' + '\n' +
+                '                    11  1111111111111111  1' + '\n' +
+                '                   1                       1' + '\n' +
+                '                  1                        1' + '\n' +
+                '                  1   1                1   1' + '\n' +
+                '                  1       1111111111       1' + '\n' +
+                '                  1     111111111111111    1' + '\n' +
+                '                  1                        1' + '\n' +
+                '                 11      1111111111111     11' + '\n' +
+                '                1                            1' + '\n' +
+                '                 11                        11' + '\n' +
+                '                   1                      1' + '\n' +
+                '                    1111111111111111111111' + '\n' +
+                '                        1111       1111' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                      11                11' + '\n' +
+                '                    11  1111111111111111  1' + '\n' +
+                '                   1                       1' + '\n' +
+                '                  1                        1' + '\n' +
+                '                  1   1                1   1' + '\n' +
+                '                  1       1111111111       1' + '\n' +
+                '                  1     111111111111111    1' + '\n' +
+                '                 11      1111111111111     11' + '\n' +
+                '                1                            1' + '\n' +
+                '                 11                        11' + '\n' +
+                '                   1                      1  ' + '\n' +
+                '                   1                      1' + '\n' +
+                '                    1111111111111111111111' + '\n' +
+                '                        1111       1111' + '\n'
+        },
+        #8 creature
+        {
+            'frame1':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                       1111111111111' + '\n' +
+                '                      1             1' + '\n' +
+                '                  1111   1           1' + '\n' +
+                '                 1              1     1' + '\n' +
+                '                 1                    1' + '\n' +
+                '                 1                    1' + '\n' +
+                '                 1                    1' + '\n' +
+                '                  1111       1   1    1' + '\n' +
+                '                      1      1   1    1' + '\n' +
+                '                      1       111     1' + '\n' +
+                '                      1               1' + '\n' +
+                '                       1             1' + '\n' +
+                '                        1    111    1' + '\n' +
+                '                         1111   1111' + '\n',
+            'frame2':
+                '\n' + 
+                '\n' + 
+                '\n' + 
+                '                       1111111111111' + '\n' +
+                '                      1             1' + '\n' +
+                '                  1111   1           1' + '\n' +
+                '                 1              1     1' + '\n' +
+                '                 1                    1' + '\n' +
+                '                  1111                1' + '\n' +
+                '                      1               1' + '\n' +
+                '                   111       1   1    1' + '\n' +
+                '                  1          1   1    1' + '\n' +
+                '                   111        111     1' + '\n' +
+                '                      1               1' + '\n' +
+                '                       1             1' + '\n' +
+                '                        1    111    1' + '\n' +
+                '                         1111   1111' + '\n'
         }
     ]
 
     random_animation = animations[randint(0,len(animations)-1)]
+    random_message = _winning_message(winner)
 
     #character animation
+    print(random_color)
     for x in range(14):
         os.system('cls')
-        print(random_color + random_animation['static1'])
         if x%2==0:
-            print(random_animation['movement1'])
+            print(random_animation['frame1'].replace('1', random_block))
         else:
-            print(random_animation['movement2'])
-        print(random_animation['static2'])
-        print('\n'*2 + '\t'*2 + space + 'Congrats, {}! Great job.'.format(winner) + '\n'*1 + reset)
-        sleep(.4)
+            print(random_animation['frame2'].replace('1', random_block))
+        print('\n\t      ' + space + random_message + '\n')
+        sleep(.3)
+    print(reset)
 
 #display list of players as they come in
 def display_available_players(players: list, players_file: str, random_block: str):
     retrieve_players(players, players_file)
     os.system('cls')
-    print(random_block * 210 + '\n\n')
+    print(random_block * 70)
+    print(random_block * 7 + '            Submit your name to join the game           ' + random_block * 7) 
+    print(random_block * 70 + '\n\n')
+
 
     if players: #players contains any value
         for player in players:

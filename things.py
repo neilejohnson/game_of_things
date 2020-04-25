@@ -111,6 +111,7 @@ while True:
 
     # grabs a new question to start the round.
     current_question = get_random_question(questions_file, num_of_questions, used_questions)
+    
     #clears answer file for new round
     clear_file(answers_file)
 
@@ -183,10 +184,10 @@ while True:
         #if there is only one answer left, the round is over and it breaks this loop
         if len(answers) == 1:
 
-            #program how to find winner....
             winner_round = retreive_winning_player(answers, answers_file, players_file)
             
             display_animation(winner_round, blocks, colors)
+
             os.system('cls')
             sleep(2)
             round_number += 1
