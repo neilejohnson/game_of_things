@@ -1,11 +1,13 @@
 import csv
 from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
-from players import add_player, add_player_answer
 from random import randint
-from answers import add_answer
+
 from pathlib import Path
+from twilio.twiml.messaging_response import MessagingResponse
+
+from answers import add_answer
 from misc import dismiss_duplicate_response
+from players import add_player, add_player_answer
 
 app = Flask(__name__)
 
@@ -48,8 +50,10 @@ def save_message():
     #adds player to csv if environment is 'name'
     if environment != 'name':
         answers_file = data_path+'answers.csv'
+
         #number = dismiss_duplicate_response(number, answers_file)
         if number:
+            
             #only logs names up to 100 characters
             message_body = message_body[:100]
             add_answer(message_body, number, answers_file)
@@ -62,8 +66,10 @@ def save_message():
 
     else:
         players_file = data_path + 'players.csv'
+
         #number = dismiss_duplicate_response(number, players_file) 
         if number:
+
             #only logs names up to 10 characters
             message_body = message_body[:10]
             add_player(message_body, number, players_file)

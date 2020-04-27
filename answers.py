@@ -1,25 +1,6 @@
 import os
 import csv
-from pprint import pprint
 from time import sleep
-
-#test variables
-# answers = [
-#     {
-#     'answer': 'this is the answer', 
-#     'number': '+508-444-2645'
-#     }, 
-#     {
-#     'answer': 'this is the second answer', 
-#     'number': '+508-444-2555'
-#     },
-#     {
-#     'answer': 'this is the third answer', 
-#     'number': '+555-444-2505'
-#     }
-# ]
-
-# last_move = ''
 
 # adds new player to answers.csv
 def add_answer(message_body: str, number: str, answers_file: str):

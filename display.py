@@ -398,7 +398,6 @@ def display_available_players(players: list, players_file: str, random_block: st
     print(random_block * 7 + '            Submit your name to join the game           ' + random_block * 7) 
     print(random_block * 70 + '\n\n')
 
-
     if players: #players contains any value
         for player in players:
             if player: #remove any empty lines
@@ -407,6 +406,9 @@ def display_available_players(players: list, players_file: str, random_block: st
     else:
         print('\t\t'+'No players have joined the game yet.')
         print('\n' * 12 + random_block * 140)
+
+    # hold for 5 seconds before refreshing
+    sleep(5)
 
 def display_current_question(current_question: str, random_block: str, random_color: str):
     print(random_color + '\n' + random_block * 70)
@@ -419,6 +421,9 @@ def display_current_question(current_question: str, random_block: str, random_co
     print(random_block * 5 + ' ' * 60 + random_block * 5)
     print(random_block * 10 + ' ' * 50 + random_block * 10)
     print(random_block * 70 + attr('reset'))
+
+    # hold on current question before it resets
+    sleep(5)
 
 def display_homescreen(blocks, colors):
     random_color = fg(colors[randint(0,len(colors)-1)])
@@ -439,8 +444,15 @@ def display_homescreen(blocks, colors):
     print(random_block * 70 + '\n')
     print(random_block * 70)
 
-    #clear random color
+    # clear random color
     print(attr('reset'))
+
+    # hold on homescreen
+    sleep(7)
+
+    # short blank screen
+    os.system('cls')
+    sleep(1)
 
 def display_answers_header(current_question, random_block, random_color):
     print(random_color + '\n' * 2 + random_block * 70)
@@ -452,8 +464,13 @@ def display_round(round_number):
     print('\n'*8)
     print('\t\t\t      ROUND {}'.format(round_number))
     print('\n'*10)
+
+    # hold on round
     sleep(3.5)
+    
     os.system('cls')
+    
+    #hold on blank screen
     sleep(2)
 
 def display_answers_in():
@@ -461,6 +478,10 @@ def display_answers_in():
     print('\n'*8)
     print('\t\t\tThe answers are in!')
     print('\n'*10)
+
+    # hold on answers in
     sleep(3.5)
     os.system('cls')
+
+    # hold on blank screen
     sleep(2)

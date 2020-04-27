@@ -1,14 +1,16 @@
 import csv
 import os
-from pathlib import Path
-from time import sleep
-from display import display_answers_in, display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header, display_round
-from players import retrieve_players, retreive_winning_player
-from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
-from questions import find_num_of_lines, get_random_question
-from colored import fg, attr
 from random import randint
+from time import sleep
+
+from colored import fg, attr
+from pathlib import Path
+
+from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
+from display import display_answers_in, display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header, display_round
 from misc import clear_file
+from players import retrieve_players, retreive_winning_player
+from questions import find_num_of_lines, get_random_question
 
 #####################################
 #####################################
@@ -61,11 +63,6 @@ num_of_questions = find_num_of_lines(questions_file)
 
 #displays the Game of Things homescreen
 display_homescreen(blocks, colors)
-sleep(7)
-
-#short blank screen
-os.system('cls')
-sleep(1)
 
 ###############################
 ##### GET NAME OF PLAYERS #####
@@ -86,7 +83,7 @@ random_block = blocks[randint(0,len(blocks)-1)]
 print(random_color)
 while environment == 'name':
     display_available_players(players, players_file, random_block)
-    sleep(5)
+
     #'start' in app.py will change environment, breaking this while loop
     with open(temp_file, "r") as temp:
         environment = temp.readline()
@@ -99,8 +96,8 @@ print(reset)
 ####################################
 
 #begin master loop for each round
-
 while True:
+
     # make sure environment is set to game in case last round was forced through
     with open(temp_file, "w") as temp:
         temp.write("game")
@@ -111,7 +108,7 @@ while True:
 
     # grabs a new question to start the round.
     current_question = get_random_question(questions_file, num_of_questions, used_questions)
-    
+
     #clears answer file for new round
     clear_file(answers_file)
 
@@ -130,12 +127,15 @@ while True:
 
     # awaiting for answers to reach number of players
     while number_of_answers != len(players):
+
         #pulls new question from question_file and drops it in used_questions list
         number_of_answers = get_number_answers(answers_file)
+
         os.system('cls')
+
         #display_current_question
         display_current_question(current_question, random_block, random_color)
-        sleep(5)
+
         # check environment. If 'force' message received, moves forward without all answers
         with open(temp_file, "r") as temp:
             environment = temp.readline()
@@ -154,14 +154,17 @@ while True:
 
     # populate answers list from answers_file
     retrieve_answers(answers, answers_file)
+
     round_over = False
 
     random_color = fg(colors[randint(0,len(colors)-1)])
     random_block = blocks[randint(0,len(blocks)-1)]
 
     while not round_over:
+
         #clear gm_input
         gm_input = 0
+
         #format answers so that they have a distinct order - example [(1, {'answer': 'some answer})]
         answers = format_answers(answers)
         
@@ -178,6 +181,7 @@ while True:
         if gm_input in [str(answer[0]) for answer in answers]:
             last_move = remove_answer(gm_input, answers, last_move)
         elif gm_input.lower() == 'undo':
+
             #put last move back into answers
             answers.append(last_move)
 
@@ -199,8 +203,3 @@ while True:
 
         #dismantle list for renumbering in next loop
         answers = dismantle_answers(answers)
-
-#Functionality to add
-#1. after 45 seconds, if someone hasn't yet submitted an answer, call them out by name.
-#2. max players... 8
-
