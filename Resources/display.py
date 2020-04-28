@@ -2,7 +2,7 @@ import os
 from time import sleep
 from random import randint
 from colored import fg, attr
-from players import retrieve_players
+from Resources.players import retrieve_players
 
 colors = [87, 158, 216, 187, 225, 169, 141, 147]
 blocks = ['░','▒','▓']

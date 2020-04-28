@@ -5,9 +5,9 @@ from random import randint
 from pathlib import Path
 from twilio.twiml.messaging_response import MessagingResponse
 
-from answers import add_answer
-from misc import dismiss_duplicate_response
-from players import add_player, add_player_answer
+from Resources.answers import add_answer
+from Resources.misc import dismiss_duplicate_response
+from Resources.players import add_player, add_player_answer
 
 app = Flask(__name__)
 

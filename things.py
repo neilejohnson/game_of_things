@@ -6,11 +6,11 @@ from time import sleep
 from colored import fg, attr
 from pathlib import Path
 
-from answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
-from display import display_answers_in, display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header, display_round
-from misc import clear_file
-from players import retrieve_players, retreive_winning_player
-from questions import find_num_of_lines, get_random_question
+from Resources.answers import get_number_answers, retrieve_answers, format_answers, dismantle_answers, remove_answer
+from Resources.display import display_answers_in, display_animation, display_homescreen, display_available_players, display_current_question, display_answers_header, display_round
+from Resources.misc import clear_file
+from Resources.players import retrieve_players, retreive_winning_player
+from Resources.questions import find_num_of_lines, get_random_question
 
 #####################################
 #####################################
