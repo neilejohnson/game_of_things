@@ -51,7 +51,8 @@ def save_message():
     if environment != 'name':
         answers_file = data_path+'answers.csv'
 
-        #number = dismiss_duplicate_response(number, answers_file)
+        number = dismiss_duplicate_response(number, answers_file)
+        
         if number:
             
             #only logs names up to 100 characters
@@ -67,7 +68,8 @@ def save_message():
     else:
         players_file = data_path + 'players.csv'
 
-        #number = dismiss_duplicate_response(number, players_file) 
+        number = dismiss_duplicate_response(number, players_file) 
+        
         if number:
 
             #only logs names up to 10 characters
