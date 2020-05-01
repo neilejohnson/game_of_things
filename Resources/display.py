@@ -2,7 +2,6 @@ import os
 from time import sleep
 from random import randint
 from colored import fg, attr
-#showing error but it isn't an error. Something to do with the lint
 from Resources.players import retrieve_players
 
 colors = [87, 158, 216, 187, 225, 169, 141, 147]
@@ -403,10 +402,13 @@ def display_available_players(players: list, players_file: str, random_block: st
         for player in players:
             if player: #remove any empty lines
                 print('\t\t'+player['name'])
-        print(('\n' * (13 - len(players)) + random_block*140))
+        print(('\n' * (13 - len(players))))
+
     else:
         print('\t\t'+'No players have joined the game yet.')
-        print('\n' * 12 + random_block * 140)
+        print('\n' * 12)
+   
+    print(random_block * 70 + '\n' + random_block * 70)
 
     # hold for 5 seconds before refreshing
     sleep(5)

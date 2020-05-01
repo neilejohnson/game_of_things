@@ -81,4 +81,4 @@ def save_message():
     return number, message_body
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

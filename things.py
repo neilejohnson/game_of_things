@@ -150,8 +150,6 @@ while True:
     ### display answers ###
     #######################
     
-    os.system('cls')
-
     # populate answers list from answers_file
     retrieve_answers(answers, answers_file)
 
@@ -161,6 +159,8 @@ while True:
     random_block = blocks[randint(0,len(blocks)-1)]
 
     while not round_over:
+
+        os.system('cls')
 
         #clear gm_input
         gm_input = 0
@@ -180,6 +180,7 @@ while True:
         #for each individual answer, check if gm_input is equal to string answer[0]
         if gm_input in [str(answer[0]) for answer in answers]:
             last_move = remove_answer(gm_input, answers, last_move)
+
         elif gm_input.lower() == 'undo':
 
             #put last move back into answers
