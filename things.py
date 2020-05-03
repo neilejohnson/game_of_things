@@ -1,6 +1,6 @@
 import csv
 import os
-from random import randint
+from random import randint, shuffle
 from time import sleep
 
 from colored import fg, attr
@@ -152,6 +152,9 @@ while True:
     
     # populate answers list from answers_file
     retrieve_answers(answers, answers_file)
+
+    #shuffle player answers
+    shuffle(answers)
 
     round_over = False
 
